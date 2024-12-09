@@ -5,6 +5,7 @@ import google.generativeai as genai
 import os
 
 app = Flask(__name__)
+api = os.getenv('makersuite')
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
@@ -33,7 +34,6 @@ def genAI():
 @app.route("/genAI_result", methods = ["GET", "POST"])
 def genAI_result():
     q = request.form.get("q")
-    api = os.getenv('makersuite')
     genai.configure(api_key=api)
     model = genai.GenerativeModel("gemini-1.5-flash")
     r = model.generate_content(q)
