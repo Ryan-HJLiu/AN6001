@@ -3,9 +3,9 @@ from flask import request, render_template
 import textblob
 import google.generativeai as genai
 import os
+api = os.getenv('makersuite')
 
 app = Flask(__name__)
-api = os.getenv('makersuite')
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
