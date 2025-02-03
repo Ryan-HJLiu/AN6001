@@ -40,7 +40,7 @@ def genAI_result():
     r = model.generate_content(q)
     return(render_template("genAI_result.html", r=r.candidates[0].content.parts[0].text))
 
-@app.route("/paynowI", methods = ["GET", "POST"])
+@app.route("/paynow", methods = ["GET", "POST"])
 def paynow():
     return(render_template("paynow.html"))
 

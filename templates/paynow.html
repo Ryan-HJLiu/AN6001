@@ -12,6 +12,10 @@
 
         <button class="btn" onclick="transfer()">Transfer</button>
         <button class="btn" onclick="transaction()">Transaction</button>
+        
+        <form action="/main" method="post">
+            <p><input type="submit" value="Main"></p>
+        </form>
 
         <p id="view_payer"></p>
         <p id="view_payee"></p>
@@ -75,7 +79,7 @@
         ];
             const web3 = new Web3(Web3.givenProvider);
             const contract = new web3.eth.Contract(contractABI, contractAddress);
-            
+
             async function transfer() {
                 const account = await web3.eth.requestAccounts();
                 const payer = document.getElementById('payer').value;
@@ -87,7 +91,7 @@
                 await contract.methods.weixin(payer, payee,amount).send({ from: accounts[0]});
             }
             async function transaction() {
-                const result = await contract.methods.check_transaction().call();
+                const result = await contract.methods.view_transaction().call();
                 document.getElementById('view_payer').innerText = "Payer: " + result[0];
                 document.getElementById('view_payee').innerText = "Payee: " + result[1];
                 document.getElementById('view_amount').innerText = "Amount: " + result[2];
